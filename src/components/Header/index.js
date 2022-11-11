@@ -21,7 +21,12 @@ export default function HeaderSection({ page, title }) {
     <Container page={page}>
       <BackgroundImage src={background} alt="" />
       <BackgroundDarkness />
-      </NavButtons>
-);
 
+      <ResponsiveHeader
+        profileTabIsOpen={profileTabIsOpen}
+        setProfileTabIsOpen={setProfileTabIsOpen}
+        logout={logout}
+      />
+    </Container>
+  );
 }
