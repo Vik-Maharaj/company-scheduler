@@ -10,4 +10,18 @@ export default function HeaderSection({ page, title }) {
     setToken,
   } = useContext(UserContext);
 
+  function logout() {
+    navigate("/");
+    setProfileTabIsOpen(false);
+    localStorage.removeItem("token");
+    setToken(null);
+  }
+
+  return (
+    <Container page={page}>
+      <BackgroundImage src={background} alt="" />
+      <BackgroundDarkness />
+      </NavButtons>
+);
+
 }
