@@ -4,9 +4,14 @@ import {
 } from "./style";
 
 export default function Admin({
-
-  
+  setCategoryData,  
 }) {
+
+  function openCategoryModal(category) {
+    setCategoryModalIsOpen(true);
+    setCategoryData(category);
+    document.body.style.overflow = "hidden";
+  }
 
   return (
     <>
