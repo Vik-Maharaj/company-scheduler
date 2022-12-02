@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
 import {
   StyledModal,
+  InputsForm,
+  Input,
 } from "./style";
 
 export default function Category({
@@ -21,6 +23,18 @@ export default function Category({
 
   return (
     <StyledModal>
+      <InputsForm>
+        {type !== "delete" && (
+          <Input
+            name="title"
+            type="text"
+            placeholder="Título"
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
+            required
+          />
+        )}
     </StyledModal>
+    
   );
 }
