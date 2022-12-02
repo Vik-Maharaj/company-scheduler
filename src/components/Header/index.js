@@ -61,7 +61,26 @@ export default function HeaderSection({ page, title }) {
           <NavButton onClick={() => navigate("/contato")}></NavButton>
 
           {loadingUserValidation ? (
-           
+            <NavButton>
+            </NavButton>
+          ) : (
+            <>
+              {userIsLoggedIn ? (
+                <NavButton
+                  onClick={() => setProfileTabIsOpen(!profileTabIsOpen)}
+                >
+                  <BsPersonCircle className="login-icon" />
+                  <p></p>
+                </NavButton>
+              ) : (
+                <NavButton onClick={() => openAuthenticationModal()}>
+                  <BsPersonCircle className="login-icon" />
+                  <p></p>
+                </NavButton>
+              )}
+            </>
+          )}
+        </NavButtons>
       </HeaderDiv>
 
       {page === "home" ? (
