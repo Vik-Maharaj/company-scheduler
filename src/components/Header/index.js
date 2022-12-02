@@ -1,6 +1,10 @@
 import {
   Container,
-  BackgroundImage
+  BackgroundImage,
+  HeaderDiv,
+  NavButtons,
+  NavButton,
+  About
 } from "./style";
 import { useContext, useState } from "react";
 import UserContext from "../../contexts/UserContext";
@@ -9,6 +13,13 @@ export default function HeaderSection({ page, title }) {
   const {
     setToken,
   } = useContext(UserContext);
+
+  const navigate = useNavigate();
+
+  function navigateToPage(page) {
+    setProfileTabIsOpen(false);
+    navigate(page);
+  }
 
   function logout() {
     navigate("/");
@@ -27,6 +38,42 @@ export default function HeaderSection({ page, title }) {
         setProfileTabIsOpen={setProfileTabIsOpen}
         logout={logout}
       />
+
+<HeaderDiv>
+        {profileTabIsOpen && (
+          <MenuContainer>
+            {userIsAdmin && (
+              <ProfileButton onClick={() => navigateToPage("/admin")}>
+              </ProfileButton>
+            )}
+            <ProfileButton onClick={() => navigateToPage("/config")}>
+            </ProfileButton>
+            <ProfileButton onClick={() => navigateToPage("/reservas")}>
+            </ProfileButton>
+            <ProfileButton onClick={() => logout()}>Sair</ProfileButton>
+          </MenuContainer>
+        )}
+        <LogoImage onClick={() => navigate("/")} src={logo} alt="" />
+        <NavButtons>
+          <NavButton onClick={() => navigate("/")}></NavButton>
+          <NavButton onClick={() => navigate("/servicos")}></NavButton>
+          <NavButton onClick={() => navigate("/sobre")}></NavButton>
+          <NavButton onClick={() => navigate("/contato")}></NavButton>
+
+          {loadingUserValidation ? (
+           
+      </HeaderDiv>
+
+      {page === "home" ? (
+        <>
+          <About page={page}>
+            <br />
+            <span></span>
+          </About>
+        </>
+      ) : (
+        <About>{title}</About>
+      )}
     </Container>
   );
 }
