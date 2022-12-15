@@ -1,47 +1,56 @@
 import { useContext, useState } from "react";
 import UserContext from "../../contexts/UserContext";
+import * as api from "../../services/api";
 import {
   Container,
   Title,
   InputContainer,
+  FieldName,
+  Input,
+  Action,
+  DeleteAccount,
 } from "./style";
 
 export default function ProfileConfigSection({ setDeleteAccountModalIsOpen }) {
   const { userData, setUserData, token } = useContext(UserContext);
 
+  const [change, setChange] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  return (
-    <Container>
-      <Title>Profile</Title>
-      <InputContainer>
-        <FieldName>Name</FieldName>
-        <Input
-          placeholder={change === "name" ? "" : userData?.name}
-          onChange={(e) => setName(e.target.value)}
-          value={name}
-          disabled={change === "name" && !isLoading ? false : true}
-        />
-        <Action onClick={() => changeInformation("name")}>
-          {change === "name" ? (
-          )}
-        </Action>
-      </InputContainer>
-      <InputContainer>
-        <FieldName>Phone</FieldName>
-        <StyledNumberFormat
-          placeholder={change === "phone" ? "" : userData?.phone}
-          onChange={(e) => setPhone(e.target.value)}
-          format={"(##) #####-####"}
-          value={phone}
-          disabled={change === "phone" && !isLoading ? false : true}
-        />
-        <Action onClick={() => changeInformation("phone")}>
-          {change === "phone" ? (
-            isLoading ? (
-          )}
-        </Action>
-      </InputContainer>
+  async function changeInformation(field) {
+    if (change === field) {
+      setIsLoading(true);
+      setChange("");
+      if (field === "name") {
+        const response = await api.updateUser(token, { name }, "name");
+        if (response.status === 200) setUserData({ ...userData, name });
 
+        handleResponse(response);
+        return;
+      }
+
+      if (field === "phone") {
+        const response = await api.updateUser(token, { phone }, "phone");
+        if (response.status === 200) setUserData({ ...userData, phone });
+        handleResponse(response);
+        return;
+      }
+
+      return;
+    }
+
+    setName("");
+    setPhone("");
+    setChange(field);
+  }
+
+      <InputContainer>
+        <DeleteAccount onClick={() => openConfirmation()}>
+          Contact
+        </DeleteAccount>
+      </InputContainer>
     </Container>
   );
 }
