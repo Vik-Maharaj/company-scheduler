@@ -46,6 +46,64 @@ export default function ProfileConfigSection({ setDeleteAccountModalIsOpen }) {
     setChange(field);
   }
 
+  function handleResponse(response) {
+    setIsLoading(false);
+    setName("");
+    setPhone("");
+    if (response.status === 200) {
+      return;
+    }
+
+    toast.error(
+      "Error",
+      toastStyles
+    );
+    return;
+  }
+
+  function openConfirmation() {
+    setDeleteAccountModalIsOpen(true);
+    document.body.style.overflow = "hidden";
+  }
+
+  return (
+    <Container>
+      <Title>Contact Details</Title>
+      <InputContainer>
+        <FieldName>Nome</FieldName>
+        <Input
+          placeholder={change === "name" ? "" : userData?.name}
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+          disabled={change === "name" && !isLoading ? false : true}
+        />
+    
+      </InputContainer>
+      <InputContainer>
+        <FieldName>Mobile</FieldName>
+        <StyledNumberFormat
+          placeholder={change === "phone" ? "" : userData?.phone}
+          onChange={(e) => setPhone(e.target.value)}
+          format={"(##) #####-####"}
+          value={phone}
+          disabled={change === "phone" && !isLoading ? false : true}
+        />
+        <Action onClick={() => changeInformation("phone")}>
+          {change === "phone" ? (
+            isLoading(
+              "Primary"
+            )
+          ) : (
+            "Alternate"
+          )}
+        </Action>
+      </InputContainer>
+      <InputContainer>
+        <FieldName>Name</FieldName>
+        <Input placeholder="Alternate" disabled />
+        <Action onClick={() => sendRecuperationEmail()}>Alternate</Action>
+      </InputContainer>
+
       <InputContainer>
         <DeleteAccount onClick={() => openConfirmation()}>
           Contact
