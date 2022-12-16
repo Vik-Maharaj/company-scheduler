@@ -92,7 +92,68 @@ export default function ServiceModal({
   }
 
   return (
-    <StyledModal>
+    <StyledModal
+      isOpen={serviceModalIsOpen}
+      ariaHideApp={false}
+      onRequestClose={() => closeModal()}
+      style={modalStyles}
+    >
+      <IoClose className="close-button" onClick={() => closeModal()} />
+      {type === "create" && <Title></Title>}
+      {type === "edit" && <Title></Title>}
+      {type === "delete" && (
+        <Title>Are you sure?</Title>
+      )}
+      <InputsForm>
+        {type !== "delete" && (
+          <>
+            <Input
+              name="name"
+              type="text"
+              placeholder="Name"
+              onChange={(e) => handleFormData(e)}
+              value={formData.name}
+              required
+            />
+            <Input
+              name="price"
+              type="text"
+              placeholder="Price"
+              onChange={(e) => handleFormData(e)}
+              value={formData.price}
+              required
+            />
+            <RangeInput>
+              <p>Duração: {duration}</p>
+              <input
+                name="duration"
+                type="range"
+                min="0"
+                max="11"
+                placeholder="Duration"
+                onChange={(e) => setDuration(rangeInputValues[e.target.value])}
+                value={rangeInputValues.indexOf(duration)}
+                required
+              />
+            </RangeInput>
+            <Textarea
+              name="description"
+              type="text"
+              placeholder="Description"
+              onChange={(e) => handleFormData(e)}
+              value={formData.description}
+              required
+            />
+          </>
+        )}
+
+        <ActionButtons>
+          <Button type="button" onClick={() => closeModal()}>
+            Cancel
+          </Button>
+          <Button onClick={(e) => handleSubmit(e)}>Confirm</Button>
+        </ActionButtons>
+      </InputsForm>
     </StyledModal>
   );
 }
