@@ -1,25 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
+import * as api from "../../services/api";
 import {
+  StyledModal,
+  Title,
+  InputsForm,
+  Input,
+  Textarea,
+  Button,
+  modalStyles
 } from "./style";
-
-export default function ServiceModal({
-  categoryData,
-  serviceData,
-  type,
-  renderPage,
-}) {
-  const rangeInputValues = [
-  ];
-
-  const { token } = useContext(UserContext);
-
-  const [formData, setFormData] = useState({
-  });
-
-
-
-  function handleFormData(e) {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  }
-}
