@@ -24,4 +24,34 @@ export default function DeleteAccount({
     setDeleteAccountlIsOpen(false);
   }
 
+  function handleSubmit() {
+    deleteAccount();
+    return;
+  }
+
+  async function deleteAccount() {
+    const response = await api.deleteAccount(token);
+    if (response.status === 200) {
+      closeModal();
+      clearToken();
+      navigate("/");
+      return toast.success("Delete Successful");
+    }
+
+    return handleError(response.data);
+  }
+
+  function handleError(responseData) {
+    if (responseData) return toast.error(responseData, toastStyles);
+
+    return toast.error(
+      "Error, request not completed",
+      toastStyles
+    );
+  }
+
+  function clearToken() {
+    localStorage.removeItem("token");
+    setToken(null);
+  }
 }
