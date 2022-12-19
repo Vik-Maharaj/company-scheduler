@@ -14,5 +14,14 @@ import {
 export default function DeleteAccount({
   deleteAccountlIsOpen,
   setDeleteAccountIsOpen,
-}) 
+}) {
+  const { token, setToken } = useContext(UserContext);
 
+  const navigate = useNavigate();
+
+  function closeModal() {
+    document.body.style.overflow = "unset";
+    setDeleteAccountlIsOpen(false);
+  }
+
+}
