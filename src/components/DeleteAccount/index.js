@@ -54,4 +54,24 @@ export default function DeleteAccount({
     localStorage.removeItem("token");
     setToken(null);
   }
+
+  return (
+    <StyledModal
+      isOpen={deleteAccountModalIsOpen}
+      ariaHideApp={false}
+      onRequestClose={() => closeModal()}
+      style={modalStyles}
+    >
+      <IoClose className="close-icon" onClick={() => closeModal()} />
+
+      <Title>Are you sure you want to delete your account?</Title>
+
+      <ActionButtons>
+        <Button type="button" onClick={() => closeModal()}>
+          Cancel
+        </Button>
+        <Button onClick={handleSubmit}>Confirm</Button>
+      </ActionButtons>
+    </StyledModal>
+  );
 }
