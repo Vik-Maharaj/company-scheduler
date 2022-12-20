@@ -16,7 +16,20 @@ export default function CommentsSection() {
     <Container>
       <Title>Comments</Title>
       <Spacer />
-      <StyledScrollContainer>
+      <StyledScrollContainer
+        cursorStyle={cursorStyle}
+        onScroll={() => setCursorStyle("grabbing")}
+        onEndScroll={() => setCursorStyle("pointer")}
+      >
+        {commentsArray.map((comment) => {
+          return (
+            <Comment key={comment.id}>
+              <Quote src={quote} alt="" />
+              <Description>{comment.description}</Description>
+              <Author>{comment.author}</Author>
+            </Comment>
+          );
+        })}
       </StyledScrollContainer>
     </Container>
   );
