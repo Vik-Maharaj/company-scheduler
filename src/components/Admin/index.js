@@ -5,7 +5,12 @@ import {
 
 export default function Admin({
   setCategoryData,  
-}) {
+}) 
+{
+  function handleCategoryAction(category, action) {
+    setCategoryModalType(action);
+    openCategoryModal(category);
+  }
 
   function openCategoryModal(category) {
     setCategoryModalIsOpen(true);
