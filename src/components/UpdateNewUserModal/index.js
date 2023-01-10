@@ -39,4 +39,14 @@ export default function UpdateNewUserModal() {
           value={phone}
           required
         />
+
+        {submitIsLoading ? (
+          <Button type="button" disabled>
+            <ThreeDots color="#E1E1E1" height={13} width={51} />
+          </Button>
+        ) : (
+          <Button onClick={(e) => handleSubmit(e)}>Confirm</Button>
+        )}
+      </InputsForm>
+    </StyledModal>
   );
