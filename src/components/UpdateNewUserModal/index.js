@@ -7,9 +7,28 @@ import {
   Title,
   InputsForm,
   Button,
+  modalStyles,
 } from "./style";
 
 export default function UpdateNewUserModal() {
   const { token, setToken, userIsNewUser, setUserIsNewUser } =
     useContext(UserContext);
-}
+
+  const [phone, setPhone] = useState("");
+  const [submitIsLoading, setSubmitIsLoading] = useState(false);
+
+  function closeModal() {
+    document.body.style.overflow = "unset";
+    setUserIsNewUser(false);
+  }
+  }
+
+  return (
+    <StyledModal isOpen={userIsNewUser} ariaHideApp={false} style={modalStyles}>
+      <Title>
+        Please enter your phone number
+      </Title>
+      <InputsForm>
+        <NumberFormat
+        />
+  );
