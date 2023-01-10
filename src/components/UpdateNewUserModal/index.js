@@ -8,6 +8,7 @@ import {
   InputsForm,
   Button,
   modalStyles,
+  toastStyles,
 } from "./style";
 
 export default function UpdateNewUserModal() {
@@ -21,6 +22,7 @@ export default function UpdateNewUserModal() {
     document.body.style.overflow = "unset";
     setUserIsNewUser(false);
   }
+
   }
 
   return (
@@ -30,5 +32,11 @@ export default function UpdateNewUserModal() {
       </Title>
       <InputsForm>
         <NumberFormat
+          type="text"
+          placeholder="Cell Phone"
+          format={"(###) ###-####"}
+          onChange={(e) => setPhone(e.target.value)}
+          value={phone}
+          required
         />
   );
