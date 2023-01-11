@@ -46,6 +46,17 @@ export default function UpdateNewUserModal() {
       toast.error(response.data, toastStyles);
       return;
     }
+
+    if (response.status === 422) {
+      toast.error(response.data.error, toastStyles);
+      return;
+    }
+
+    toast.error(
+      "Error, update not successful",
+      toastStyles
+    );
+    return;
   }
 
   return (
