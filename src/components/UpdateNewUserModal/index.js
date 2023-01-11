@@ -23,6 +23,18 @@ export default function UpdateNewUserModal() {
     setUserIsNewUser(false);
   }
 
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setSubmitIsLoading(true);
+
+    const response = await api.updateUser(token, { phone }, "phone");
+    if (response.status === 200) {
+      localStorage.setItem("token", response.data);
+      setToken(response.data);
+      setSubmitIsLoading(false);
+      closeModal();
+      return;
+    }
   }
 
   return (
@@ -50,3 +62,4 @@ export default function UpdateNewUserModal() {
       </InputsForm>
     </StyledModal>
   );
+}
