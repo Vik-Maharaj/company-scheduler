@@ -35,6 +35,17 @@ export default function UpdateNewUserModal() {
       closeModal();
       return;
     }
+
+    handleResponseErrors(response);
+    setSubmitIsLoading(false);
+    return;
+  }
+
+  function handleResponseErrors(response) {
+    if (response.status === 409) {
+      toast.error(response.data, toastStyles);
+      return;
+    }
   }
 
   return (
