@@ -32,4 +32,16 @@ export default function ReadMore({
     document.body.style.overflow = "hidden";
     return;
   }
+
+  return (
+    <>
+      <StyledModal
+        isOpen={readMoreIsOpen}
+        ariaHideApp={false}
+        onRequestClose={() => closeModal()}
+        style={modalStyles}
+>
+      </StyledModal>
+    </>
+  );
 }
