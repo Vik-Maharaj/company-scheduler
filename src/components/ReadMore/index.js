@@ -9,7 +9,10 @@ import { useContext } from "react";
 import UserContext from "../../contexts/UserContext";
 
 export default function ReadMore({
+  readMoreIsOpen,
   setReadMoreIsOpen,
+  serviceData,
+  setReservationIsOpen,
 }) {
   const { token, setAuthenticationIsOpen } = useContext(UserContext);
 
@@ -18,4 +21,15 @@ export default function ReadMore({
     setReadMoreIsOpen(false);
   }
 
+  function handleReservation() {
+    closeModal();
+    if (!token) {
+      setAuthenticationIsOpen(true);
+      document.body.style.overflow = "hidden";
+      return;
+    }
+    setReservationIsOpen(true);
+    document.body.style.overflow = "hidden";
+    return;
+  }
 }
