@@ -40,7 +40,18 @@ export default function ReadMore({
         ariaHideApp={false}
         onRequestClose={() => closeModal()}
         style={modalStyles}
->
+      >
+        <ModalHeader>
+          <Title>{serviceData?.name}</Title>
+          <IoClose className="close-icon" onClick={() => closeModal()} />
+        </ModalHeader>
+        <Description>{serviceData?.description}</Description>
+        <ButtonContainer>
+          <div>
+            <Duration>{serviceData?.duration}</Duration>
+          </div>
+          <Button onClick={() => handleReservation()}>Reserve</Button>
+        </ButtonContainer>
       </StyledModal>
     </>
   );
